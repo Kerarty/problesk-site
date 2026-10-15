@@ -27,12 +27,14 @@ function refresh() {
 
 /* ---------- иконки в разметке ---------- */
 function initIcons() {
-  document.querySelectorAll('[data-icon]').forEach(el => {
+  document.querySelectorAll('[data-icon]:not([data-icon-done])').forEach(el => {
     el.insertAdjacentHTML('afterbegin', icon(el.dataset.icon, Number(el.dataset.size) || 20));
+    el.setAttribute('data-icon-done', '');
   });
 
-  document.querySelectorAll('[data-list]').forEach(el => {
+  document.querySelectorAll('[data-list]:not([data-list-done])').forEach(el => {
     el.insertAdjacentHTML('afterbegin', icon(el.dataset.list, 20));
+    el.setAttribute('data-list-done', '');
   });
 }
 
