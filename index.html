@@ -42,11 +42,28 @@
       <div class="stage__glow"></div>
       <div class="stage__ring"></div>
       <div class="stage__ring"></div>
-      <div class="stage__ring"></div>
+
+      <div class="paint-panel" data-panel style="--split:52">
+        <div class="paint-panel__layer" data-car="before"></div>
+        <div class="paint-panel__layer paint-panel__after" data-car="after"></div>
+        <div class="paint-panel__sheen"></div>
+        <div class="paint-panel__frame"></div>
+
+        <span class="paint-panel__tag paint-panel__tag--before">Было</span>
+        <span class="paint-panel__tag paint-panel__tag--after">Стало</span>
+
+        <div class="paint-panel__divider" aria-hidden="true"></div>
+        <button class="paint-panel__grip" data-grip
+                aria-label="Сравнить до и после. Стрелки влево и вправо меняют границу"
+                role="slider" aria-valuemin="8" aria-valuemax="92" aria-valuenow="52">
+          <span data-icon="split" data-size="18"></span>
+        </button>
+      </div>
+
+      <div class="stage__shadow"></div>
       <div class="stage__bottles" data-stage-bottles></div>
       <div class="stage__badge stage__badge--1" data-badge="ok"></div>
       <div class="stage__badge stage__badge--2" data-badge="accent"></div>
-      <div class="stage__badge stage__badge--3" data-badge="violet"></div>
     </div>
   </div>
 </section>

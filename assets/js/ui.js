@@ -37,7 +37,8 @@ const ICON = {
   info:     '<circle cx="12" cy="12" r="9"/><path d="M12 16v-4.5M12 8.2h.01"/>',
   tag:      '<path d="M11.4 2.8H4.2a1.4 1.4 0 0 0-1.4 1.4v7.2a2 2 0 0 0 .6 1.4l8.2 8.2a1.4 1.4 0 0 0 2 0l6.4-6.4a1.4 1.4 0 0 0 0-2l-8.2-8.2a2 2 0 0 0-1.4-.6Z"/><circle cx="7.6" cy="7.6" r="1.3"/>',
   layers:   '<path d="m12 2.8 9 4.6-9 4.6-9-4.6 9-4.6Z"/><path d="m3 12.4 9 4.6 9-4.6M3 16.9l9 4.6 9-4.6"/>',
-  ruler:    '<rect x="2" y="8" width="20" height="8" rx="1.6"/><path d="M6.5 8v3M10 8v2M13.5 8v3M17 8v2"/>'
+  ruler:    '<rect x="2" y="8" width="20" height="8" rx="1.6"/><path d="M6.5 8v3M10 8v2M13.5 8v3M17 8v2"/>',
+  split:    '<path d="M12 3v18"/><path d="m9.4 7-3.2 5 3.2 5M14.6 7l3.2 5-3.2 5"/>'
 };
 
 function icon(name, size = 20, stroke = 1.7) {
@@ -47,6 +48,117 @@ function icon(name, size = 20, stroke = 1.7) {
 
 /* ---------- генератор картинки товара ---------- */
 let uidCounter = 0;
+
+/* ---------- кузов: «до» (матовое) и «после» (глянец) ---------- */
+/* Один и тот же силуэт в двух состояниях — их накладывают друг на друга
+   и режут вертикальной границей, которую можно таскать мышью */
+const CAR_BODY =
+  'M 18 144 L 18 121 C 18 113 25 107 35 106 L 100 100 L 144 60 ' +
+  'C 154 50 168 45 184 45 L 252 45 C 268 45 282 50 291 61 L 324 100 ' +
+  'L 365 107 C 375 108 382 114 382 122 L 382 144 L 334 144 ' +
+  'A 28 28 0 0 0 278 144 L 126 144 A 28 28 0 0 0 70 144 Z';
+
+const CAR_GLASS_F = 'M 148 95 L 163 59 L 205 59 L 205 95 Z';
+const CAR_GLASS_R = 'M 213 59 L 251 59 L 284 95 L 213 95 Z';
+
+function carArt(mode) {
+  const u = 'p' + (++uidCounter);
+  const glossy = mode === 'after';
+
+  const paint = glossy
+    ? `<stop offset="0" stop-color="#0e4463"/>
+       <stop offset=".38" stop-color="#0a2b43"/>
+       <stop offset=".58" stop-color="#14618a"/>
+       <stop offset=".8" stop-color="#0a2c45"/>
+       <stop offset="1" stop-color="#05161f"/>`
+    : `<stop offset="0" stop-color="#4a525c"/>
+       <stop offset=".4" stop-color="#3e464f"/>
+       <stop offset=".72" stop-color="#343b43"/>
+       <stop offset="1" stop-color="#2c323a"/>`;
+
+  const glass = glossy ? '#04121c' : '#272d34';
+
+  /* блики по покрытию — только у «после» */
+  const streaks = glossy ? `
+    <g filter="url(#${u}blur)">
+      <path d="M44 118 C 120 110 208 100 316 92" stroke="#ffffff"
+            stroke-opacity=".55" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <path d="M104 84 C 158 72 226 68 292 80" stroke="#9ee2ff"
+            stroke-opacity=".38" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M26 130 C 120 126 250 120 374 110" stroke="#ffffff"
+            stroke-opacity=".16" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    </g>
+    <path d="M18 121 C 18 113 25 107 35 106 L 100 100 L 144 60
+             C 154 50 168 45 184 45 L 252 45 C 268 45 282 50 291 61 L 324 100"
+          fill="none" stroke="#cdeeff" stroke-opacity=".5" stroke-width="1.6"/>
+    <path d="M36 110 L 100 104" stroke="#ffffff" stroke-opacity=".75"
+          stroke-width="2" stroke-linecap="round" fill="none"/>` : '';
+
+  /* разводы, пыль и водяные пятна — только у «до» */
+  const grime = glossy ? '' : `
+    <g fill="#c8d2de" fill-opacity=".3">
+      <circle cx="128" cy="122" r="5"/><circle cx="196" cy="112" r="3.4"/>
+      <circle cx="268" cy="126" r="4.2"/><circle cx="316" cy="108" r="2.8"/>
+      <circle cx="88" cy="130" r="3.6"/><circle cx="236" cy="134" r="2.6"/>
+      <circle cx="162" cy="118" r="2.4"/>
+    </g>
+    <g stroke="#d2dae4" stroke-opacity=".16" stroke-width="1.4" fill="none">
+      <path d="M60 126 C 150 112 250 106 356 100"/>
+      <path d="M52 132 C 146 120 244 114 360 106"/>
+    </g>
+    <g fill="#59616b" fill-opacity=".4">
+      <ellipse cx="120" cy="146" rx="34" ry="5"/>
+      <ellipse cx="300" cy="146" rx="30" ry="5"/>
+    </g>`;
+
+  const rim = glossy ? '#5fc8f5' : '#454d57';
+  const rimFill = glossy ? '#0d3d59' : '#2c333b';
+
+  return `<svg viewBox="8 34 384 164" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="${u}p" x1="0" y1="0" x2="1" y2="1">${paint}</linearGradient>
+      <filter id="${u}blur" x="-15%" y="-40%" width="130%" height="180%">
+        <feGaussianBlur stdDeviation="3.2"/>
+      </filter>
+      <filter id="${u}sh" x="-20%" y="-30%" width="140%" height="170%">
+        <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity=".55"/>
+      </filter>
+    </defs>
+
+    <ellipse cx="200" cy="176" rx="168" ry="11" fill="#000" opacity=".5"/>
+    <g filter="url(#${u}sh)">
+      <path d="${CAR_BODY}" fill="url(#${u}p)"/>
+      <path d="${CAR_GLASS_F}" fill="${glass}" opacity=".92"/>
+      <path d="${CAR_GLASS_R}" fill="${glass}" opacity=".92"/>
+      <path d="${CAR_GLASS_F}" fill="none" stroke="${rim}" stroke-opacity=".3" stroke-width="1"/>
+      <path d="${CAR_GLASS_R}" fill="none" stroke="${rim}" stroke-opacity=".3" stroke-width="1"/>
+      ${streaks}
+      ${grime}
+      <path d="M70 144 A 28 28 0 0 1 126 144" fill="none" stroke="${rim}" stroke-opacity=".35" stroke-width="1.4"/>
+      <path d="M278 144 A 28 28 0 0 1 334 144" fill="none" stroke="${rim}" stroke-opacity=".35" stroke-width="1.4"/>
+    </g>
+
+    <g>
+      <circle cx="98" cy="150" r="26" fill="#0a0e13"/>
+      <circle cx="98" cy="150" r="26" fill="none" stroke="${rim}" stroke-opacity=".45" stroke-width="2"/>
+      <circle cx="98" cy="150" r="13" fill="${rimFill}"/>
+      ${glossy
+        ? '<g fill="#9fe4ff" fill-opacity=".55"><rect x="94.5" y="143" width="3.5" height="6" rx="1.6" transform="rotate(0 98 146)"/><rect x="101" y="139" width="3.5" height="14" rx="1.6"/><rect x="94.5" y="152" width="3.5" height="10" rx="1.6"/><rect x="88.5" y="144" width="3.5" height="10" rx="1.6"/></g>'
+        : '<circle cx="98" cy="150" r="13" fill="none" stroke="#4d555f" stroke-width="2"/>'}
+
+      <circle cx="306" cy="150" r="26" fill="#0a0e13"/>
+      <circle cx="306" cy="150" r="26" fill="none" stroke="${rim}" stroke-opacity=".45" stroke-width="2"/>
+      <circle cx="306" cy="150" r="13" fill="${rimFill}"/>
+      ${glossy
+        ? '<g fill="#9fe4ff" fill-opacity=".55"><rect x="302.5" y="143" width="3.5" height="6" rx="1.6"/><rect x="309" y="139" width="3.5" height="14" rx="1.6"/><rect x="302.5" y="152" width="3.5" height="10" rx="1.6"/><rect x="296.5" y="144" width="3.5" height="10" rx="1.6"/></g>'
+        : '<circle cx="306" cy="150" r="13" fill="none" stroke="#4d555f" stroke-width="2"/>'}
+
+      <rect x="188" y="132" width="26" height="4" rx="2" fill="${rim}" opacity=".5"/>
+      <rect x="24" y="128" width="14" height="5" rx="2.5" fill="${rim}" opacity=".55"/>
+      <rect x="358" y="126" width="14" height="5" rx="2.5" fill="${rim}" opacity=".3"/>
+    </g>
+  </svg>`;
+}
 
 function productSVG(type, color) {
   const uid = 'g' + (++uidCounter);

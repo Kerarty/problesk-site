@@ -38,27 +38,91 @@ function renderHeroFacts() {
   host.innerHTML = facts.map(([i, t]) => `<span class="fact">${icon(i, 16)}${t}</span>`).join('');
 }
 
-/* ---------- сцена в hero ---------- */
+/* ---------- сцена в hero: кузов до/после + бутылки ---------- */
 function renderStage() {
+  document.querySelector('[data-car="before"]').innerHTML = carArt('before');
+  document.querySelector('[data-car="after"]').innerHTML  = carArt('after');
+
   const host = document.querySelector('[data-stage-bottles]');
   if (host) {
-    const pick = ['ss-lollipop', 'ss-bitum', 'ss-ceramic9h', 'ss-wax']
+    const pick = ['ss-lollipop', 'ss-ceramic9h', 'ss-wax']
       .map(id => PRODUCTS.find(p => p.id === id))
       .filter(Boolean);
-    host.innerHTML = `<div style="display:flex;align-items:flex-end;justify-content:center;gap:10px">
-      ${pick.map(p => `<div style="width:${p.type === 'can' ? 22 : 26}%">${productSVG(p.type, p.color)}</div>`).join('')}
-    </div>`;
+    host.innerHTML = pick.map(p => productSVG(p.type, p.color)).join('');
   }
 
   const badges = {
     ok:     ['checkCircle', 'Всё в наличии'],
-    accent: ['shield',      'Керамика 9H'],
-    violet: ['bag',         'Оптовые фасовки']
+    accent: ['shield',      'Керамика 9H']
   };
   document.querySelectorAll('[data-badge]').forEach(el => {
     const [name, text] = badges[el.dataset.badge] || [];
     el.innerHTML = `${icon(name, 15)}${text}`;
   });
+
+  initPaintPanel();
+}
+
+/* ---------- перетаскивание границы «до/после» ---------- */
+function initPaintPanel() {
+  const panel = document.querySelector('[data-panel]');
+  const grip  = document.querySelector('[data-grip]');
+  if (!panel || !grip) return;
+
+  const MIN = 8, MAX = 92;
+  let dragging = false;
+
+  const apply = pct => {
+    const v = Math.min(MAX, Math.max(MIN, pct));
+    panel.style.setProperty('--split', v.toFixed(2));
+    grip.setAttribute('aria-valuenow', Math.round(v));
+    grip.setAttribute('aria-valuetext', `Граница сравнения: ${Math.round(v)}%`);
+  };
+
+  const setSplit = px => {
+    const box = panel.getBoundingClientRect();
+    if (!box.width) return;
+    apply(((px - box.left) / box.width) * 100);
+  };
+
+  const stop = () => {
+    if (!dragging) return;
+    dragging = false;
+    panel.classList.remove('is-dragging');
+  };
+
+  /* мышь и палец одинаково */
+  panel.addEventListener('pointerdown', e => {
+    dragging = true;
+    panel.classList.add('is-dragging');
+    panel.setPointerCapture?.(e.pointerId);
+    grip.focus({ preventScroll: true });
+    setSplit(e.clientX);
+    e.preventDefault();
+  });
+
+  panel.addEventListener('pointermove', e => {
+    if (dragging) setSplit(e.clientX);
+  });
+
+  /* отпустить указатель ловим на window: если палец увели за пределы
+     окна или панели, событие до панели не дойдёт и граница залипнет */
+  window.addEventListener('pointerup', stop);
+  window.addEventListener('pointercancel', stop);
+  window.addEventListener('blur', stop);
+  panel.addEventListener('lostpointercapture', stop);
+
+  /* с клавиатуры тоже двигается */
+  grip.addEventListener('keydown', e => {
+    const cur = parseFloat(panel.style.getPropertyValue('--split')) || 52;
+    const step = e.shiftKey ? 10 : 3;
+    if (e.key === 'ArrowLeft')  { apply(cur - step); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { apply(cur + step); e.preventDefault(); }
+    if (e.key === 'Home')       { apply(MIN); e.preventDefault(); }
+    if (e.key === 'End')        { apply(MAX); e.preventDefault(); }
+  });
+
+  apply(52);
 }
 
 /* ---------- категории ---------- */
