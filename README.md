@@ -7,6 +7,8 @@ WordPress.
 
 ![Главная страница](assets/screens/01-home.png)
 
+**Живая версия:** https://kerarty.github.io/problesk-site/
+
 ## Зачем
 
 Магазин уже работает офлайн, но о нём мало кто знает за пределами Светлогорска.
