@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ПроБлеск — магазин автохимии и детейлинга в Светлогорске</title>
+<meta name="description" content="ПроБлеск — магазин автохимии, автокосметики и товаров для детейлинга в Светлогорске. Shine Systems, Leraton, ProBlesk. Подбор под задачу, доставка по Беларуси.">
+<meta property="og:title" content="ПроБлеск — магазин автохимии и детейлинга в Светлогорске">
+<meta property="og:description" content="Профессиональная автохимия, полировка, защита ЛКП и уход за салоном. Поможем подобрать под вашу задачу.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="header" data-header></header>
+<div class="mobile-menu" data-mobile-menu></div>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero__grid">
+    <div>
+      <div class="eyebrow">Светлогорск · ул. Мирошниченко, 25/1</div>
+      <h1>Навести <span class="grad-text">блеск</span> в любимой машине</h1>
+      <p class="hero__sub">
+        Магазин автохимии, автокосметики и товаров для детейлинга. Собираем ассортимент
+        вручную, обновляем каждые три недели и подбираем средство под вашу задачу —
+        от мойки после соли до керамики на кузов.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn-primary btn-lg" href="#catalog">Открыть каталог</a>
+        <a class="btn btn-ghost btn-lg" href="catalog.html">Все товары</a>
+      </div>
+      <div class="hero__facts"></div>
+    </div>
+
+    <div class="hero__stage">
+      <div class="stage__glow"></div>
+      <div class="stage__ring"></div>
+      <div class="stage__ring"></div>
+      <div class="stage__ring"></div>
+      <div class="stage__bottles" data-stage-bottles></div>
+      <div class="stage__badge stage__badge--1" data-badge="ok"></div>
+      <div class="stage__badge stage__badge--2" data-badge="accent"></div>
+      <div class="stage__badge stage__badge--3" data-badge="violet"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ БРЕНДЫ-БЕГУЩКА ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track" data-marquee></div>
+</div>
+
+<!-- ============ ПРОБЛЕМА → РЕШЕНИЕ ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Зачем это всё</div>
+      <h2>Знакомые проблемы — и что с ними делать</h2>
+      <p class="lead">Почти у каждого владельца машины в Беларуси есть один и тот же список
+        претензий к своему кузову. Все они решаемы, просто нужны правильные средства.</p>
+    </div>
+
+    <div class="grid grid--4">
+      <article class="problem reveal" style="--pc:rgba(251,113,133,.4)">
+        <div class="problem__icon" data-icon="drop"></div>
+        <h3>Битум и соль</h3>
+        <p>Летом кузов в пятнах от битума, зимой в соляной каше. Обычная мойка не берёт.</p>
+        <span class="problem__answer">Очиститель битума + активная пена</span>
+      </article>
+
+      <article class="problem reveal" style="--pc:rgba(167,139,250,.4)">
+        <div class="problem__icon" data-icon="bubbles"></div>
+        <h3>Зелень и запах</h3>
+        <p>Налёт на дисках, запах в салоне, мутный кэжух. Вымыть, но не вычистить.</p>
+        <span class="problem__answer">Пена для глубокой чистки + озонирование</span>
+      </article>
+
+      <article class="problem reveal" style="--pc:rgba(251,191,36,.4)">
+        <div class="problem__icon" data-icon="sparkle"></div>
+        <h3>Царапины и голограммы</h3>
+        <p>Ветки, песок, неаккуратные парковки. Лак уже не ровный, и всё видно на солнце.</p>
+        <span class="problem__answer">Полировка в три этапа</span>
+      </article>
+
+      <article class="problem reveal" style="--pc:rgba(52,211,153,.4)">
+        <div class="problem__icon" data-icon="shield"></div>
+        <h3>ЛКП без защиты</h3>
+        <p>Краска выгорела, блеск пропал, каждый дождь оставляет разводы.</p>
+        <span class="problem__answer">Керамика, силикон или воск</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КАТЕГОРИИ ============ -->
+<section class="section section--alt" id="catalog">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Каталог</div>
+      <h2>Всё, что нужно для ухода за авто</h2>
+      <p class="lead">Десять разделов — от шампуня до круга для полировки.
+        Нажмите на категорию, чтобы увидеть состав.</p>
+    </div>
+    <div class="grid grid--10" data-cats></div>
+  </div>
+</section>
+
+<!-- ============ ХИТЫ ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Часто берут</div>
+      <h2>Хиты продаж</h2>
+      <p class="lead">Позиции, которые забирают быстрее остальных.
+        Наличие меняется — уточним по телефону или в мессенджере.</p>
+    </div>
+    <div class="grid grid--4" data-hits></div>
+    <div style="text-align:center;margin-top:44px">
+      <a class="btn btn-ghost btn-lg" href="catalog.html">Весь каталог <span data-icon="arrow" data-size="17"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ НАБОРЫ ============ -->
+<section class="section section--alt" id="sets">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Готовые комплекты</div>
+      <h2>Наборы под типовые задачи</h2>
+      <p class="lead">Собрали сами из того, что берут вместе чаще всего.
+        Дешевле, чем по отдельности, и не нужно разбираться в ассортименте.</p>
+    </div>
+    <div class="sets-grid" data-sets></div>
+  </div>
+</section>
+
+<!-- ============ КАК ВЫБРАТЬ ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Помощь в выборе</div>
+      <h2>Не знаете, что взять? Это нормально</h2>
+      <p class="lead">Половина вопросов в магазине — «что мне взять»,
+        и это хороший вопрос. Ответ занимает пару минут и стоит ноль.</p>
+    </div>
+
+    <div class="picker">
+      <div class="picker__list reveal">
+        <div class="picker__item">
+          <span class="picker__num">1</span>
+          <div><b>Опишите задачу, а не средство</b>
+            <p>«Хочу убрать битум», «машина серьёзно грязная», «хочу блеск на лето» — этого достаточно, чтобы начать.</p></div>
+        </div>
+        <div class="picker__item">
+          <span class="picker__num">2</span>
+          <div><b>Подберём состав и объём</b>
+            <p>Скажем, хватит ли литра на одну мойку или нужно брать пятилитровую канистру. Меньше не нужно.</p></div>
+        </div>
+        <div class="picker__item">
+          <span class="picker__num">3</span>
+          <div><b>Подскажем порядок применения</b>
+            <p>Многие средства работают только в связке. Расскажем, что и в какой последовательности наносить.</p></div>
+        </div>
+        <div class="picker__item">
+          <span class="picker__num">4</span>
+          <div><b>Скажем, что можно не покупать</b>
+            <p>Если задача решается дешевле — так и скажем. Консультация бесплатная и ни к чему не обязывает.</p></div>
+        </div>
+      </div>
+
+      <div class="reveal" style="display:grid;gap:16px">
+        <div class="info-card">
+          <h3>Для детейлинга и автомойок</h3>
+          <p>Профессиональная фасовка, отсрочка, безналичный расчёт с закрывающими документами.
+            Соберём заказ под ваш расход, а не «на глаз».</p>
+        </div>
+        <div class="info-card">
+          <h3>Не нашли нужное в каталоге?</h3>
+          <p>Каталог обновляется каждые три недели и не может покрыть всё.
+            Напишите — привезём под заказ за 1–3 дня, скорее всего найдём.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn btn-wa" href="https://wa.me/375291502493?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%BF%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B0%D0%B9%D1%82%D0%B5%2C%20%D1%87%D1%82%D0%BE%20%D0%BC%D0%BD%D0%B5%20%D0%BD%D1%83%D0%B6%D0%BD%D0%BE%20%D0%B2%D0%B7%D1%8F%D1%82%D1%8C" target="_blank" rel="noopener"><span data-icon="whatsapp"></span>Написать</a>
+          <a class="btn btn-ghost" href="tel:+375291502493"><span data-icon="phone"></span>Позвонить</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ГАЙДЫ ============ -->
+<section class="section section--alt" id="guides">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Гайды</div>
+      <h2>Разбираемся в теме вместе с вами</h2>
+      <p class="lead">Пишем то, что реально спрашивают на полке: что выбрать,
+        в каком порядке применять и где можно ошибиться.</p>
+    </div>
+    <div class="grid grid--3" data-guides></div>
+  </div>
+</section>
+
+<!-- ============ ОТЗЫВЫ ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <div class="eyebrow" style="justify-content:center">Отзывы</div>
+      <h2>Что говорят клиенты</h2>
+    </div>
+    <div class="grid grid--3" data-reviews></div>
+  </div>
+</section>
+
+<!-- ============ О МАГАЗИНЕ + КАРТА ============ -->
+<section class="section section--alt">
+  <div class="container about-split">
+    <div class="reveal">
+      <div class="eyebrow">О магазине</div>
+      <h2 style="font-size:clamp(26px,3.6vw,38px);margin-bottom:18px">Не «автохимия у дороги», а профессиональная витрина</h2>
+      <p class="lead">«ПроБлеск» открылся на ул. Мирошниченко в бывшем здании «Белинвестбанка».
+        Собрали то, чем реально работают мастера, — и разложили так, чтобы можно было выбрать самому.</p>
+
+      <ul class="about-list">
+        <li data-list="shield"><div><b>Профессиональные бренды</b><span>Shine Systems, Leraton, собственная линейка ProBlesk — то, что вы увидите в детейлинг-центре</span></div></li>
+        <li data-list="layers"><div><b>Ассортимент обновляется каждые три недели</b><span>Привозим новинки и убираем то, что не продаётся</span></div></li>
+        <li data-list="bag"><div><b>Оптовые фасовки</b><span>От литра до двадцати — для личных нужд и для сервиса</span></div></li>
+        <li data-list="ruler"><div><b>Вход с пандусом</b><span>Доступно и на коляске — если приехали к нам лично</span></div></li>
+      </ul>
+
+      <a class="btn btn-ghost" href="about.html">Подробнее о магазине <span data-icon="arrow" data-size="17"></span></a>
+    </div>
+
+    <div class="map-card reveal">
+      <div class="map-card__canvas">
+        <div class="map-pin">
+          <div class="map-pin__core" data-icon="pin"></div>
+        </div>
+      </div>
+      <div class="map-card__info">
+        <div>
+          <h3>Адрес</h3>
+          <p>г. Светлогорск<br>ул. Мирошниченко, 25/1, пом. 4</p>
+        </div>
+        <div>
+          <h3>Режим работы</h3>
+          <p>Пн–Пт 09:00–19:00<br>Сб 09:00–15:00 · Вс выходной</p>
+        </div>
+        <div class="map-card__actions">
+          <a class="btn btn-primary btn-sm" href="https://yandex.by/maps/org/problesk/236214146885/" target="_blank" rel="noopener"><span data-icon="pin" data-size="15"></span>Построить маршрут</a>
+          <a class="btn btn-ghost btn-sm" href="contacts.html">Подробнее о контактах</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <div class="eyebrow" style="justify-content:center">Вопросы</div>
+      <h2>Частые вопросы</h2>
+    </div>
+    <div class="faq" data-faq></div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="cta reveal">
+      <h2>Напишите — подскажем, что взять</h2>
+      <p>Опишите задачу или пришлите фото загрязнения. Отвечаем в мессенджерах
+        быстрее, чем обычно, и не навязываем лишнее.</p>
+      <div class="cta__btns">
+        <a class="btn btn-wa btn-lg" href="https://wa.me/37529150293?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%BF%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%20%D1%81%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B2%D0%BE." target="_blank" rel="noopener">Написать в WhatsApp</a>
+        <a class="btn btn-ghost btn-lg" href="tel:+375291502493">Позвонить</a>
+      </div>
+
+      <form class="cta__form" data-form="subscribe">
+        <input type="tel" placeholder="+375 (__) ___-__-__" aria-label="Телефон для подписки на новинки">
+        <button class="btn btn-primary" type="submit">Узнавать о поступлениях</button>
+      </form>
+      <p class="cta__note" data-form-note>Никакого спама — только сообщения о новых поступлениях и сезонных акциях.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

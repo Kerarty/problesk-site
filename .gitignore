@@ -1,0 +1,24 @@
+# Зависимости и сборка — в прототипе их нет
+node_modules/
+dist/
+build/
+
+# Окружение
+.env
+.env.*
+
+# Логи и мусор
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Бэкапы и временное
+*.sql
+*.db
+*.bak
+*.tmp
